@@ -1,0 +1,9 @@
+xmas{
+    pin_9,10{
+        return 1;
+    }
+
+    pin_11-13{
+        return 0;
+    }
+}

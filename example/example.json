@@ -1,0 +1,17 @@
+{
+    "pinMax": 13,
+    "pinMin": 2,
+    "pinSW": "A1",
+
+    "flushCycle": 2000,
+    "dutyRatio": 0.1,
+
+    "functionSources": [
+        "example/func/default.func",
+        "example/func/xmas.func",
+        "example/func/mochi.func",
+        "example/func/oni.func"
+    ],
+
+    "patternOrder" : ["xmas", "mochi", "oni"]
+}

@@ -1,0 +1,13 @@
+{
+	"authors": [
+		"jj1lis(ts18435)"
+	],
+	"copyright": "Copyright (c) 2020, jj1lis, Radio Craft Club",
+	"description": "Generate .ino code from User-Friendly fileformat.",
+	"license": "MIT License",
+	"name": "illumigenerator",
+    "dependencies": {
+        "termcolor-d" : "~>0.0.1"
+    },
+    "stringImportPaths": ["example/"]
+}

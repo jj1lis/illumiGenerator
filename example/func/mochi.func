@@ -1,0 +1,9 @@
+mochi{
+    pin_9-11,13{
+        return 0;
+    }
+
+    pin_12{
+        return 1;
+    }
+}

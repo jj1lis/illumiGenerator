@@ -1,0 +1,13 @@
+Default{
+    pin_2{
+        return 1;
+    }
+
+    pin_3-8{
+        if(0 <= phase && phase <= PI){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+}

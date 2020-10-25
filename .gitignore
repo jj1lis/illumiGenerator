@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/illumigenerator
+illumigenerator.so
+illumigenerator.dylib
+illumigenerator.dll
+illumigenerator.a
+illumigenerator.lib
+illumigenerator-test-*
+*.exe
+*.o
+*.obj
+*.lst

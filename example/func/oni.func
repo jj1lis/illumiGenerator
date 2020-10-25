@@ -1,0 +1,9 @@
+oni{
+    pin_9,11{
+        return 1;
+    }
+    
+    pin_10,12,13{
+        return 0;
+    }
+}
