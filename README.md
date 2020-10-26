@@ -1,6 +1,9 @@
 # illumiGenerator
 JSONファイルとC-likeな簡易コードからイルミネーション用のArduinoソースコードを生成するツールです。
 
+### To English readers
+[here](README_en.md) is README in English.
+
 # 注意
 illumiGenerator は私たちの部活動で使うために書かれたツールです。
 無線部員にあっては、ハードウェアの仕様を把握の上使用してください。
@@ -9,17 +12,17 @@ illumiGenerator は私たちの部活動で使うために書かれたツール�
 
 ## 概要
 ```
-$ illumiGenerator <jsonfile> <outputname>
+$ ./illumiGenerator <jsonfile> <outputname>
 ```
 
 ### 第一引数 \<jsonfile\>
 illumiGenerator はJSON形式の設定ファイルを使用します。
 詳しい内容については
-[JSONファイルの書式](https://github.com/jj1lis/illumiGenerator/new/master?readme=1#json%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%9B%B8%E5%BC%8F)
+[JSONファイルの書式](https://github.com/jj1lis/illumiGenerator/blob/master/README.md#%E5%90%84%E7%A8%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%9B%B8%E5%BC%8F)
 を参照してください。
 
 ### 第二引数 \<outputname\>
-illumiGenerator が生成する'.ino'ファイルの名前です。末尾の拡張子は自動では付与されません。
+illumiGenerator が生成する`.ino`ファイルの名前です。末尾の拡張子は自動では付与されません。
 ```
 # 例
 
@@ -65,7 +68,7 @@ illumiGenerator が読み込むJSONファイルの全体は、**過不足なく�
 |"functionSources"|配列（文字列）|制御関数が書かれたファイル|
 |"patternOrder"|配列（文字列）|モードの一覧と順番|
 
-"functionSources"はいくつあっても、その中のソースコードがどのように分割されていても問題ありません。"patternOrder"に書かれたモードの名前と、"functionSources"で指定されているソースファイルでのモードの名前は一致しなければなりません。
+`"functionSources"`はいくつあっても、その中のソースコードがどのように分割されていても問題ありません。"patternOrder"に書かれたモードの名前と、"functionSources"で指定されているソースファイルでのモードの名前は一致しなければなりません。
 レポジトリ内の[例](example/example.json)も参照してください。
 
 ## 制御関数ファイルの書式
@@ -103,17 +106,17 @@ Tag{
 ```
 というソースコードはモード`Tag`の時、ピンa,b\~c,dについては`process A`を、ピンe\~f,g,hについては`process B`を実行するよう指定しています。
 
-変数`phase`は周期["flushCycle"](https://github.com/jj1lis/illumiGenerator/new/master?readme=1#%E8%A6%81%E7%B4%A0%E4%B8%80%E8%A6%A7)の中で[0, 2π]と変化する位相です。
-`return sin(phase);`と書けば、周期内で三角関数に従って滑らかにPWMのDuty比を変化させます。
+変数`phase`は周期["flushCycle"](https://github.com/jj1lis/illumiGenerator/blob/master/README.md#%E8%A6%81%E7%B4%A0%E4%B8%80%E8%A6%A7)の中で[0, 2π]と変化する位相です。
+`return sin(phase);`と書けば、周期内で正弦関数に従って滑らかにPWMのDuty比を変化させます。
 これらの関数の返り値が`1`のときそのピンのDuty比は
-["dutyRatio"](https://github.com/jj1lis/illumiGenerator/new/master?readme=1#%E8%A6%81%E7%B4%A0%E4%B8%80%E8%A6%A7)となり、`0`であれば全く点灯しません。
+["dutyRatio"](https://github.com/jj1lis/illumiGenerator/blob/master/README.md#%E8%A6%81%E7%B4%A0%E4%B8%80%E8%A6%A7)となり、`0`であれば全く点灯しません。
 
 illumiGenerator 内での文法チェックは実装されておらず、内部処理的には関数内の記述がそのまま出力のソースコードに貼り付けられるだけです。
 したがってサポートする文法、関数、定数等のより具体的な内容については[公式リファレンス](https://www.arduino.cc/reference/en/)や[日本語訳版](http://www.musashinodenpa.com/arduino/ref/)
 を参照しつつ頑張って書いてください。
 
 ### "Default"について
-["patternOrder"](https://github.com/jj1lis/illumiGenerator/new/master?readme=1#%E8%A6%81%E7%B4%A0%E4%B8%80%E8%A6%A7)
+["patternOrder"](https://github.com/jj1lis/illumiGenerator/blob/master/README.md#%E8%A6%81%E7%B4%A0%E4%B8%80%E8%A6%A7)
 に記載されたタグの他に、`Default`という特別なタグが存在します。
 例えばタグ`ModeA`が定義されており、`ModeA`においてはピン3\~5のみについて関数が記述されているとします。使用できるピンは全体で2\~13です。
 モード`ModeA`の際にはこれ以外のピンは普通動作せず、常に消灯されたままになります。しかしもし`Default`タグにピン2\~7の動作が記述されていれば、
