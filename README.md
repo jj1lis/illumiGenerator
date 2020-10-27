@@ -18,7 +18,7 @@ $ ./illumiGenerator <jsonfile> <outputname>
 ### 第一引数 \<jsonfile\>
 illumiGenerator はJSON形式の設定ファイルを使用します。
 詳しい内容については
-[JSONファイルの書式](https://github.com/jj1lis/illumiGenerator/blob/master/README.md#%E5%90%84%E7%A8%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%9B%B8%E5%BC%8F)
+[JSONファイルの書式](https://github.com/jj1lis/illumiGenerator/blob/master/README.md#json%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%9B%B8%E5%BC%8F)
 を参照してください。
 
 ### 第二引数 \<outputname\>

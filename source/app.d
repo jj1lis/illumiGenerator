@@ -13,21 +13,23 @@ import generate;
 
 void main(string[] args){
     try{
-        if(args.length == 1)
-            throw new ArgumentException("specify argument.");
-        if(args.length > 2)
+        if(args.length < 3)
+            throw new ArgumentException("too few argument.");
+        if(args.length > 3)
             throw new ArgumentException("too many arguments.");
 
         import std.array : join;
         auto config = new Configuration(args[1].readText.parseJSON);
         auto codes = config.sources.map!(path => path.readText).join.parseCode;
+        auto filename = args[2];
 
         config.checkConfiguration(codes);
         //auto inocode = generateArduinoCode(config, codes);
-        generateArduinoCode(config, codes).writeln;
+        generateArduinoCode(config, codes).outputFile(filename);
 
     }catch(ArgumentException ae){
         ae.msg.writelnError;
+        writelnNotice("./illumiGenerator <jsonfile> <outputname>");
         return;
     }catch(FileException fe){
         fe.msg.writelnError;

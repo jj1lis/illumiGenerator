@@ -17,6 +17,7 @@ class Configuration{
 
     public:
     invariant(0 <= duty_ratio && duty_ratio <= 1);
+
     this(JSONValue json){
         import std.conv : to;
         import std.algorithm : map;
@@ -32,66 +33,48 @@ class Configuration{
     }
 
     @property @safe{
-        auto pinMax(){ return this.pin_max; }
+        auto pinMax()const{ return this.pin_max; }
         auto pinMax(ubyte pin_max){
             this.pin_max = pin_max;
         }
 
-        auto pinMin(){ return this.pin_min; }
+        auto pinMin()const{ return this.pin_min; }
         auto pinMin(ubyte pin_min){
             this.pin_min = pin_min;
         }
 
-        auto pinSW(){ return this.pin_sw; }
+        auto pinSW()const{ return this.pin_sw; }
         auto pinSW(string pin_sw){
             this.pin_sw = pin_sw;
         }
 
-        auto flushCycle(){ return this.flush_cycle; }
+        auto flushCycle()const{ return this.flush_cycle; }
         auto flushCycle(uint flush_cycle){
             this.flush_cycle = flush_cycle;
         }
 
-        auto dutyRatio(){ return this.duty_ratio; }
+        auto dutyRatio()const{ return this.duty_ratio; }
         auto dutyRatio(float duty_ratio){
             this.duty_ratio = duty_ratio;
         }
 
-        auto sources(){ return _sources; }
+        auto sources()const{ return _sources; }
 
-        auto patternOrder(){ return pattern_order; }
+        inout patternOrder()const{ return pattern_order; }
+    }
 
-        auto pinInterval(){
-            import std.range : iota;
-            import std.algorithm : map;
-            import std.conv : to;
-            return iota(pinMin, pinMax + 1).map!(p => p.to!ubyte);
-        }
+    auto pinInterval()const{
+        import std.range : iota;
+        import std.algorithm : map;
+        import std.conv : to;
+        return iota(pinMin, pinMax + 1).map!(p => p.to!ubyte);
     }
 }
 
 
-class ControlCode{
-    private:
-        string _tag;
-        string[ubyte] _pinfunctions;
+auto parseCode(const string rawcode){
 
-    public:
-        this(string _tag, string[ubyte] _pinfunctions){
-            this._tag = _tag;
-            this._pinfunctions = _pinfunctions;
-        }
-
-        @property @safe{
-            string tag(){ return this._tag; }
-            string[ubyte] pinfunctions(){ return this._pinfunctions; }
-        }
-}
-
-
-auto parseCode(string rawcode){
-
-    auto code = (string code){
+    auto code = (const string code){
         import std.string : strip, splitLines;
         import std.algorithm : map;
         import std.array : join;
@@ -143,9 +126,6 @@ auto parseCode(string rawcode){
     }
 
     return codes;
-    //import std.algorithm : map;
-    //import std.array : array;
-    //return codes.keys.map!(tag =>new ControlCode(tag, codes[tag])).array;
 }
 
 

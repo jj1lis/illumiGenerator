@@ -5,7 +5,7 @@ import std.format : format;
 import exception;
 import parse;
 
-string generateArduinoCode(Configuration config, string[ubyte][string] codes){
+string generateArduinoCode(const Configuration config, const string[ubyte][string] codes){
     string code;
 
     code ~= generatePresettings(config);
@@ -22,7 +22,7 @@ string generateArduinoCode(Configuration config, string[ubyte][string] codes){
     return code;
 }
 
-string generatePresettings(Configuration config){
+string generatePresettings(const Configuration config){
     import std.conv : to;
     string code;
     code = "#include <EEPROM.h>\n#include <avr/wdt.h>\n\nconst int ADDR_MODE = 0;\n";
@@ -35,7 +35,7 @@ string generatePresettings(Configuration config){
     return code;
 }
 
-string generateMode(Configuration config){
+string generateMode(const Configuration config){
     string code = "typedef enum{\n";
     foreach(i; 0..config.patternOrder.length){
         code ~= format("\t%s = %s;\n", config.patternOrder[i], i);
@@ -44,7 +44,7 @@ string generateMode(Configuration config){
     return code;
 }
 
-string generatePinFunctions(Configuration config, string[ubyte][string] codes){
+string generatePinFunctions(const Configuration config, const string[ubyte][string] codes){
     string code;
     foreach(tag; "Default" ~ config.patternOrder){
         import std.range : iota;
@@ -64,7 +64,7 @@ string generatePinFunctions(Configuration config, string[ubyte][string] codes){
     return code;
 }
 
-string generateFunctionArrays(Configuration config, string[ubyte][string] codes){
+string generateFunctionArrays(const Configuration config, const string[ubyte][string] codes){
     string code;
     foreach(tag; codes.keys){
         import std.algorithm : map;
@@ -81,7 +81,7 @@ string generateFunctionArrays(Configuration config, string[ubyte][string] codes)
     return code;
 }
 
-string generateGetFunctions(Configuration config){
+string generateGetFunctions(const Configuration config){
     string code;
     {
         code ~= "float (*getFunctions(Mode mode, unsigned byte index))(float){\n";
@@ -99,7 +99,7 @@ string generateGetFunctions(Configuration config){
     return code;
 }
 
-string generateLoop(Configuration config){
+string generateLoop(const Configuration config){
     string code;
     {
         code ~= "void loop(){\n";
