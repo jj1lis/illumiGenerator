@@ -30,7 +30,7 @@ $ illumiGenerator hoge.json fuga.ino
 
 # Format of Files
 
-## Format of JSON File"
+## Format of JSON File
 The whole of the JSON file that illumiGenerator reads **must be ONLY ONE JSON Object, neither too much or nor too little.** 
 The operation when it's constituted of multiple JSON Objects is undefined (but exception would be thrown.)
 
@@ -74,7 +74,7 @@ Also refer this [example](example/example.json).
 
 ### Syntax
 
-the control function files are written according to the simplified-C grammar, such as:
+the control function files are written according to the simplified-C syntax, such as:
 
 
 ```
@@ -107,17 +107,17 @@ Tag{
 }
 ```
 
-This source code specifies to run `process A` at pin `a, b \~ c, d`, and `process B` at pin `e \~ f, g, h`.
+This source code specifies to run `process A` at pin `a, b ~ c, d`, and `process B` at pin `e ~ f, g, h`.
 
-A variable `phase` is the phase ["flushCycle"](https://github.com/jj1lis/illumiGenerator/blob/master/README_en.md#format-of-json-file) moves in the interval [0, 2π].
+A variable `phase` is the phase ["flushCycle"](https://github.com/jj1lis/illumiGenerator/blob/master/README_en.md#list-of-elements) moves in the interval [0, 2π].
 If you write `return sin(phase);`, the Duty ratio will change smoothly along the sine function in the interval.
-The Duty ratio is ["dutyRatio"](https://github.com/jj1lis/illumiGenerator/blob/master/README_en.md#format-of-json-file) when `1` is returned, and it doesn't flush at all when `0` is returned.
+The Duty ratio is ["dutyRatio"](https://github.com/jj1lis/illumiGenerator/blob/master/README_en.md#list-of-elements) when `1` is returned, and it doesn't flush at all when `0` is returned.
 
 To say the truth, as implemented, illumiGenerator doesn't do the syntax check, pasting the description in the functions into the output as it is. So please refer [Arduino Official Langhage Reference](https://www.arduino.cc/reference/en/) and more. Good Luck!
 
 
 ### About "Default"
-There is the special tag, called "Default" besides ["patternOrder"](https://github.com/jj1lis/illumiGenerator/blob/master/README_en.md#format-of-json-file).
-For instance tag `ModeA`, described functions about pin `3 \~ 5`, is defined. The whole of pins are `2 \~ 13`.
-Other pins usually doesn't works in `ModeA` and are off. However, illumiGenerator compliments operations at pin `2, 6, 7` if functions are written in the tag "Default" (operations at `3 \~5` aren't replaced). 
-Pins `8 \~ 13` are always off because their functions are not written anywhere.
+There is the special tag, called "Default" besides ["patternOrder"](https://github.com/jj1lis/illumiGenerator/blob/master/README_en.md#list-of-elements).
+For instance tag `ModeA`, described functions about pin `3 ~ 5`, is defined. The whole of pins are `2 ~ 13`.
+Other pins usually doesn't works in `ModeA` and are off. However, illumiGenerator compliments operations at pin `2, 6, 7` if functions are written in the tag "Default" (operations at `3 ~5` aren't replaced). 
+Pins `8 ~ 13` are always off because their functions are not written anywhere.
